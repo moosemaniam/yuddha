@@ -1,7 +1,7 @@
 #include "soul.h"
 #include <cmath> // For fabs
 
-Soul::Soul(int id, const std::string& name, float light) : id(id), name(name), light(light) {
+Soul::Soul(int id, const std::string& name, float light, Position position) : id(id), name(name), light(light), position(position) {
     if (this->light < 0.0f) this->light = 0.0f;
     if (this->light > 1.0f) this->light = 1.0f;
 }
@@ -63,4 +63,8 @@ const std::string& Soul::getName() const {
 
 float Soul::getLight() const {
     return light;
+}
+
+Position Soul::getPosition() const {
+    return position;
 }
