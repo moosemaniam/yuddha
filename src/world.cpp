@@ -34,15 +34,18 @@ void World::updateLightDarkBalance() {
 void World::update() {
     updateLightDarkBalance();
 
-    // Simple mote creation logic
-    if (GetRandomValue(0, 1000) < frequency * 100) {
-        Position pos = {
-            (float)GetRandomValue(0, width),
-            (float)GetRandomValue(0, height),
-            0.0f
-        };
-        Mote newMote(GetRandomValue(1000, 9999), 100.0f, pos);
-        addMote(newMote);
+    // Mote creation logic that slows down as the number of motes approaches MOTES_MAX
+    if (motes.size() < MOTES_MAX) {
+        float scalingFactor = (float)(MOTES_MAX - motes.size()) / MOTES_MAX;
+        if (GetRandomValue(0, 1000) < frequency * 100 * scalingFactor) {
+            Position pos = {
+                (float)GetRandomValue(0, width),
+                (float)GetRandomValue(0, height),
+                0.0f
+            };
+            Mote newMote(GetRandomValue(1000, 9999), 100.0f, pos);
+            addMote(newMote);
+        }
     }
 
     // Update motes (e.g., simple movement)

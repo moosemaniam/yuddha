@@ -8,6 +8,8 @@
 
 class World {
 private:
+    const int SOULS_MAX = 100;
+    const int MOTES_MAX = 100;
     int width;
     int height;
     std::vector<Soul> souls;
